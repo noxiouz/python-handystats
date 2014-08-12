@@ -1,0 +1,14 @@
+*.pyc
+*.pyo
+*.swp
+*.swo
+.tox*
+
+*.so
+
+build/*
+dist/*
+docs/_build/*
+docs/_template/*
+*.egg-info/*
+
