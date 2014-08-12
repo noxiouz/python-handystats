@@ -28,7 +28,7 @@ PyDoc_STRVAR(handy_init__doc__, "");
 static PyObject*
 handy_init(PyObject* self, PyObject* args)
 {
-	HANDY_INIT();
+    HANDY_INIT();
     Py_RETURN_NONE;
 }
 
@@ -36,7 +36,7 @@ PyDoc_STRVAR(handy_finalize__doc__, "");
 static PyObject*
 handy_finalize(PyObject* self, PyObject* args)
 {
-	HANDY_FINALIZE();
+    HANDY_FINALIZE();
     Py_RETURN_NONE;
 }
 
@@ -45,16 +45,16 @@ PyDoc_STRVAR(handy_counter_init__doc__, "");
 static PyObject*
 handy_counter_init(PyObject* self, PyObject* args)
 {
-	const char *name;
-	int value;
+    const char *name;
+    int value;
 
-	if (!PyArg_ParseTuple(args, "s|i:value", &name, &value)) {
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "s|i:value", &name, &value)) {
+        return NULL;
+    }
 
-	HANDY_COUNTER_INIT(name, value);
+    HANDY_COUNTER_INIT(name, value);
 
-	Py_RETURN_NONE;
+    Py_RETURN_NONE;
 }
 
 
@@ -62,15 +62,15 @@ PyDoc_STRVAR(handy_counter_increment__doc__, "");
 static PyObject*
 handy_counter_increment(PyObject* self, PyObject* args)
 {
-	const char *name;
-	int value;
+    const char *name;
+    int value;
 
-	if (!PyArg_ParseTuple(args, "si", &name, &value)) {
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "si", &name, &value)) {
+        return NULL;
+    }
 
-	HANDY_COUNTER_INCREMENT(name, value);
-	Py_RETURN_NONE;
+    HANDY_COUNTER_INCREMENT(name, value);
+    Py_RETURN_NONE;
 }
 
 
@@ -78,15 +78,15 @@ PyDoc_STRVAR(handy_counter_decrement__doc__, "");
 static PyObject*
 handy_counter_decrement(PyObject* self, PyObject* args)
 {
-	const char *name;
-	int value;
+    const char *name;
+    int value;
 
-	if (!PyArg_ParseTuple(args, "si", &name, &value)) {
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "si", &name, &value)) {
+        return NULL;
+    }
 
-	HANDY_COUNTER_DECREMENT(name, value);
-	Py_RETURN_NONE;
+    HANDY_COUNTER_DECREMENT(name, value);
+    Py_RETURN_NONE;
 }
 
 
@@ -94,15 +94,15 @@ PyDoc_STRVAR(handy_counter_change__doc__, "");
 static PyObject*
 handy_counter_change(PyObject* self, PyObject* args)
 {
-	const char *name;
-	int value;
+    const char *name;
+    int value;
 
-	if (!PyArg_ParseTuple(args, "si", &name, &value)) {
-		return NULL;
-	}
+    if (!PyArg_ParseTuple(args, "si", &name, &value)) {
+        return NULL;
+    }
 
-	HANDY_COUNTER_CHANGE(name, value);
-	Py_RETURN_NONE;
+    HANDY_COUNTER_CHANGE(name, value);
+    Py_RETURN_NONE;
 }
 
 
@@ -110,7 +110,7 @@ PyDoc_STRVAR(handy_json_dump__doc__, "Return statistic as formated json");
 static PyObject*
 handy_json_dump(PyObject* self, PyObject* args)
 {
-	PyObject* value = Py_BuildValue("s", HANDY_JSON_DUMP()->c_str());
+    PyObject* value = Py_BuildValue("s", HANDY_JSON_DUMP()->c_str());
     return value;
 }
 
@@ -129,9 +129,9 @@ static PyMethodDef handystats_methods[] =
 
 
 extern "C" {
-	void
-	init_handystats(void)
-	{
-	    (void) Py_InitModule3("_handystats", handystats_methods, NULL);
-	}
+    void
+    init_handystats(void)
+    {
+        (void) Py_InitModule3("_handystats", handystats_methods, NULL);
+    }
 }
