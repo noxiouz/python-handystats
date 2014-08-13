@@ -45,10 +45,13 @@ PyDoc_STRVAR(handy_counter_init__doc__, "");
 static PyObject*
 handy_counter_init(PyObject* self, PyObject* args)
 {
-    const char *name;
-    int value;
+    using namespace handystats::metrics;
 
-    if (!PyArg_ParseTuple(args, "s|i:value", &name, &value)) {
+    const char *name;
+    /* int64_t  L */
+    counter::value_type value = counter::value_type();
+
+    if (!PyArg_ParseTuple(args, "s|L:value", &name, &value)) {
         return NULL;
     }
 
@@ -62,10 +65,12 @@ PyDoc_STRVAR(handy_counter_increment__doc__, "");
 static PyObject*
 handy_counter_increment(PyObject* self, PyObject* args)
 {
-    const char *name;
-    int value;
+    using namespace handystats::metrics;
 
-    if (!PyArg_ParseTuple(args, "si", &name, &value)) {
+    const char *name;
+    counter::value_type value = 1;
+
+    if (!PyArg_ParseTuple(args, "s|i", &name, &value)) {
         return NULL;
     }
 
@@ -78,10 +83,12 @@ PyDoc_STRVAR(handy_counter_decrement__doc__, "");
 static PyObject*
 handy_counter_decrement(PyObject* self, PyObject* args)
 {
-    const char *name;
-    int value;
+    using namespace handystats::metrics;
 
-    if (!PyArg_ParseTuple(args, "si", &name, &value)) {
+    const char *name;
+    counter::value_type value = 1;
+
+    if (!PyArg_ParseTuple(args, "s|i", &name, &value)) {
         return NULL;
     }
 
@@ -94,8 +101,10 @@ PyDoc_STRVAR(handy_counter_change__doc__, "");
 static PyObject*
 handy_counter_change(PyObject* self, PyObject* args)
 {
+    using namespace handystats::metrics;
+
     const char *name;
-    int value;
+    counter::value_type value = 0;
 
     if (!PyArg_ParseTuple(args, "si", &name, &value)) {
         return NULL;
@@ -116,13 +125,13 @@ handy_timer_init(PyObject* self, PyObject* args)
     const char *name;
 
     // uint_64t as "K"
-    timer::instance_id_type instance_id;
+    timer::instance_id_type instance_id = timer::DEFAULT_INSTANCE_ID;
 
     /*
     ToDo: move PyArg_ParseTuple(...)
           to implemnettion function
     */
-    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+    if (!PyArg_ParseTuple(args, "s|K", &name, &instance_id)) {
         return NULL;
     }
 
@@ -140,13 +149,13 @@ handy_timer_start(PyObject* self, PyObject* args)
     const char *name;
 
     // uint_64t as "K"
-    timer::instance_id_type instance_id;
+    timer::instance_id_type instance_id = timer::DEFAULT_INSTANCE_ID;
 
     /*
     ToDo: move PyArg_ParseTuple(...)
           to implemnettion function
     */
-    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+    if (!PyArg_ParseTuple(args, "s|K", &name, &instance_id)) {
         return NULL;
     }
 
@@ -164,13 +173,13 @@ handy_timer_stop(PyObject* self, PyObject* args)
     const char *name;
 
     // uint_64t as "K"
-    timer::instance_id_type instance_id;
+    timer::instance_id_type instance_id = timer::DEFAULT_INSTANCE_ID;
 
     /*
     ToDo: move PyArg_ParseTuple(...)
-          to implementation function, add time parser
+          to implemnettion function
     */
-    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+    if (!PyArg_ParseTuple(args, "s|K", &name, &instance_id)) {
         return NULL;
     }
 
@@ -188,13 +197,13 @@ handy_timer_heartbeat(PyObject* self, PyObject* args)
     const char *name;
 
     // uint_64t as "K"
-    timer::instance_id_type instance_id;
+    timer::instance_id_type instance_id = timer::DEFAULT_INSTANCE_ID;
 
     /*
     ToDo: move PyArg_ParseTuple(...)
-          to implementation function, add time parser
+          to implemnettion function
     */
-    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+    if (!PyArg_ParseTuple(args, "s|K", &name, &instance_id)) {
         return NULL;
     }
 
@@ -212,13 +221,13 @@ handy_timer_discard(PyObject* self, PyObject* args)
     const char *name;
 
     // uint_64t as "K"
-    timer::instance_id_type instance_id;
+    timer::instance_id_type instance_id = timer::DEFAULT_INSTANCE_ID;
 
     /*
     ToDo: move PyArg_ParseTuple(...)
-          to implementation function, add time parser
+          to implemnettion function
     */
-    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+    if (!PyArg_ParseTuple(args, "s|K", &name, &instance_id)) {
         return NULL;
     }
 
