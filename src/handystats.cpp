@@ -3,12 +3,12 @@
  *
  * This file is part of Handystats for Python.
  *
- * Tokentarser is free software; you can redistribute it and/or modify
+ * Handystats for Python is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * Tokenparser is distributed in the hope that it will be useful,
+ * Handystats for Python is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
@@ -106,6 +106,128 @@ handy_counter_change(PyObject* self, PyObject* args)
 }
 
 
+
+PyDoc_STRVAR(handy_timer_init__doc__, "");
+static PyObject*
+handy_timer_init(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // uint_64t as "K"
+    timer::instance_id_type instance_id;
+
+    /*
+    ToDo: move PyArg_ParseTuple(...)
+          to implemnettion function
+    */
+    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_TIMER_INIT(name, instance_id);
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(handy_timer_start__doc__, "");
+static PyObject*
+handy_timer_start(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // uint_64t as "K"
+    timer::instance_id_type instance_id;
+
+    /*
+    ToDo: move PyArg_ParseTuple(...)
+          to implemnettion function
+    */
+    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_TIMER_START(name, instance_id);
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(handy_timer_stop__doc__, "");
+static PyObject*
+handy_timer_stop(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // uint_64t as "K"
+    timer::instance_id_type instance_id;
+
+    /*
+    ToDo: move PyArg_ParseTuple(...)
+          to implemnettion function
+    */
+    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_TIMER_STOP(name, instance_id);
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(handy_timer_heartbeat__doc__, "");
+static PyObject*
+handy_timer_heartbeat(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // uint_64t as "K"
+    timer::instance_id_type instance_id;
+
+    /*
+    ToDo: move PyArg_ParseTuple(...)
+          to implemnettion function
+    */
+    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_TIMER_HEARTBEAT(name, instance_id);
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(handy_timer_discard__doc__, "");
+static PyObject*
+handy_timer_discard(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // uint_64t as "K"
+    timer::instance_id_type instance_id;
+
+    /*
+    ToDo: move PyArg_ParseTuple(...)
+          to implemnettion function
+    */
+    if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_TIMER_DISCARD(name, instance_id);
+    Py_RETURN_NONE;
+}
+
+
+
 PyDoc_STRVAR(handy_json_dump__doc__, "Return statistic as formated json");
 static PyObject*
 handy_json_dump(PyObject* self, PyObject* args)
@@ -114,15 +236,27 @@ handy_json_dump(PyObject* self, PyObject* args)
     return value;
 }
 
-
+/*
+    ToDo: No GIL
+*/
 static PyMethodDef handystats_methods[] =
 {
     {"handy_init", handy_init, METH_NOARGS, handy_init__doc__},
     {"handy_finalize", handy_finalize, METH_NOARGS, handy_finalize__doc__},
+
+    /* counter */
     {"handy_counter_init", handy_counter_init, METH_VARARGS, handy_counter_init__doc__},
     {"handy_counter_increment", handy_counter_increment, METH_VARARGS, handy_counter_increment__doc__},
     {"handy_counter_decrement", handy_counter_decrement, METH_VARARGS, handy_counter_decrement__doc__},
     {"handy_counter_change", handy_counter_change, METH_VARARGS, handy_counter_change__doc__},
+
+    /* timer */
+    {"handy_timer_init", handy_timer_init, METH_VARARGS, handy_timer_init__doc__},
+    {"handy_timer_start", handy_timer_start, METH_VARARGS, handy_timer_start__doc__},
+    {"handy_timer_stop", handy_timer_stop, METH_VARARGS, handy_timer_stop__doc__},
+    {"handy_timer_heartbeat", handy_timer_heartbeat, METH_VARARGS, handy_timer_heartbeat__doc__},
+    {"handy_timer_discard", handy_timer_discard, METH_VARARGS, handy_timer_discard__doc__},
+
     {"handy_json_dump", handy_json_dump, METH_NOARGS, handy_json_dump__doc__},
     {NULL, NULL, 0, NULL}
 };
