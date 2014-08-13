@@ -168,7 +168,7 @@ handy_timer_stop(PyObject* self, PyObject* args)
 
     /*
     ToDo: move PyArg_ParseTuple(...)
-          to implemnettion function
+          to implementation function, add time parser
     */
     if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
         return NULL;
@@ -192,7 +192,7 @@ handy_timer_heartbeat(PyObject* self, PyObject* args)
 
     /*
     ToDo: move PyArg_ParseTuple(...)
-          to implemnettion function
+          to implementation function, add time parser
     */
     if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
         return NULL;
@@ -216,7 +216,7 @@ handy_timer_discard(PyObject* self, PyObject* args)
 
     /*
     ToDo: move PyArg_ParseTuple(...)
-          to implemnettion function
+          to implementation function, add time parser
     */
     if (!PyArg_ParseTuple(args, "sK", &name, &instance_id)) {
         return NULL;
