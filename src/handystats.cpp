@@ -20,6 +20,7 @@
 #include <Python.h>
 
 #include <handystats/operation.hpp>
+#include <handystats/configuration.hpp>
 #include <handystats/json_dump.hpp>
 #include <handystats/metrics_dump.hpp>
 #include <handystats/measuring_points.hpp>
@@ -282,6 +283,38 @@ handy_gauge_set(PyObject* self, PyObject* args)
 }
 
 
+PyDoc_STRVAR(handy_configuration_file__doc__, "");
+static PyObject*
+handy_configuration_file(PyObject* self, PyObject* args)
+{
+    const char *filename;
+
+    if (!PyArg_ParseTuple(args, "s", &filename)) {
+        return NULL;
+    }
+
+    HANDY_CONFIGURATION_FILE(filename);
+
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(handy_configuration_json__doc__, "");
+static PyObject*
+handy_configuration_json(PyObject* self, PyObject* args)
+{
+    const char *json_config;
+
+    if (!PyArg_ParseTuple(args, "s", &json_config)) {
+        return NULL;
+    }
+
+    HANDY_CONFIGURATION_JSON(json_config);
+
+    Py_RETURN_NONE;
+}
+
+
 PyDoc_STRVAR(handy_json_dump__doc__, "Return statistic as formated json");
 static PyObject*
 handy_json_dump(PyObject* self, PyObject* args)
@@ -297,6 +330,10 @@ static PyMethodDef handystats_methods[] =
 {
     {"handy_init", handy_init, METH_NOARGS, handy_init__doc__},
     {"handy_finalize", handy_finalize, METH_NOARGS, handy_finalize__doc__},
+
+    /* configuration */
+    {"handy_configuration_file", handy_configuration_file, METH_VARARGS, handy_configuration_file__doc__},
+    {"handy_configuration_json", handy_configuration_json, METH_VARARGS, handy_configuration_json__doc__},
 
     /* counter */
     {"handy_counter_init", handy_counter_init, METH_VARARGS, handy_counter_init__doc__},
