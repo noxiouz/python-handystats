@@ -227,6 +227,51 @@ handy_timer_discard(PyObject* self, PyObject* args)
 }
 
 
+PyDoc_STRVAR(handy_gauge_init__doc__, "");
+static PyObject*
+handy_gauge_init(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // double as "d"
+    gauge::value_type instance_id;
+     /*
+        ToDo: move PyArg_ParseTuple(...)
+          to implementation function, add time parser
+    */
+    if (!PyArg_ParseTuple(args, "sd", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_GAUGE_INIT(name, instance_id);
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(handy_gauge_set__doc__, "");
+static PyObject*
+handy_gauge_set(PyObject* self, PyObject* args)
+{
+    using namespace handystats::metrics;
+
+    const char *name;
+
+    // double as "d"
+    gauge::value_type instance_id;
+     /*
+        ToDo: move PyArg_ParseTuple(...)
+          to implementation function, add time parser
+    */
+    if (!PyArg_ParseTuple(args, "sd", &name, &instance_id)) {
+        return NULL;
+    }
+
+    HANDY_GAUGE_SET(name, instance_id);
+    Py_RETURN_NONE;
+}
+
 
 PyDoc_STRVAR(handy_json_dump__doc__, "Return statistic as formated json");
 static PyObject*
@@ -257,6 +302,11 @@ static PyMethodDef handystats_methods[] =
     {"handy_timer_heartbeat", handy_timer_heartbeat, METH_VARARGS, handy_timer_heartbeat__doc__},
     {"handy_timer_discard", handy_timer_discard, METH_VARARGS, handy_timer_discard__doc__},
 
+    /* gauge */
+    {"handy_gauge_init", handy_gauge_init, METH_VARARGS, handy_gauge_init__doc__},
+    {"handy_gauge_set", handy_gauge_set, METH_VARARGS, handy_gauge_set__doc__},
+
+    /* dump */
     {"handy_json_dump", handy_json_dump, METH_NOARGS, handy_json_dump__doc__},
     {NULL, NULL, 0, NULL}
 };
