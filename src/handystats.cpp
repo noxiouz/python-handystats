@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Anton Tyurin <noxiouz@yandex.ru>
+ * Copyright (c) 2014 Anton Tyurin <noxiouz@yandex.ru>
  *
  * This file is part of Handystats for Python.
  *
