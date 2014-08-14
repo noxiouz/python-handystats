@@ -22,7 +22,7 @@ from setuptools import setup, Extension
 __author__ = 'Anton Tiurin'
 __copyright__ = 'Copyright 2014'
 __credits__ = []
-__license__ = 'GPL2'
+__license__ = 'LGPLv3+'
 __version__ = '0.1.0'
 __maintainer__ = 'Anton Tiurin'
 __email__ = 'noxiouz@yandex.ru'
@@ -30,7 +30,7 @@ __status__ = 'Production'
 __title__ = 'Handystats'
 __url__ = 'https://github.com/noxiouz/python-handystats'
 __description__ = 'Python binding for handystats library'
-
+d = 'https://github.com/noxiouz/python-handystats/archive/master.zip'
 
 setup(
     name=__title__,
@@ -40,7 +40,9 @@ setup(
     maintainer=__maintainer__,
     maintainer_email=__email__,
     url=__url__,
+    download_url=d,
     description=__description__,
+    long_description=open('./README.md').read(),
     packages=['handystats'],
     ext_modules=[Extension("handystats/_handystats",
                  ["src/handystats.cpp"],
@@ -57,7 +59,9 @@ setup(
                  'Programming Language :: Python :: Implementation :: CPython',
                  'Operating System :: OS Independent',
                  'Topic :: Utilities',
-                 'License :: OSI Approved :: GPL2'],
+                 'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)'],
+    platforms=['Independent'],
+    license=open('./LICENSE').read(),
     zip_safe=False,
     tests_require=open('./tests/requirements.txt').read(),
     test_suite='nose.collector'
