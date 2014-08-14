@@ -25,26 +25,26 @@
 #include <handystats/metrics_dump.hpp>
 #include <handystats/measuring_points.hpp>
 
-PyDoc_STRVAR(handy_init__doc__, "");
+PyDoc_STRVAR(init__doc__, "");
 static PyObject*
-handy_init(PyObject* self, PyObject* args)
+init(PyObject* self, PyObject* args)
 {
     HANDY_INIT();
     Py_RETURN_NONE;
 }
 
-PyDoc_STRVAR(handy_finalize__doc__, "");
+PyDoc_STRVAR(finalize__doc__, "");
 static PyObject*
-handy_finalize(PyObject* self, PyObject* args)
+finalize(PyObject* self, PyObject* args)
 {
     HANDY_FINALIZE();
     Py_RETURN_NONE;
 }
 
 
-PyDoc_STRVAR(handy_counter_init__doc__, "");
+PyDoc_STRVAR(counter_init__doc__, "");
 static PyObject*
-handy_counter_init(PyObject* self, PyObject* args)
+counter_init(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -62,9 +62,9 @@ handy_counter_init(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_counter_increment__doc__, "");
+PyDoc_STRVAR(counter_increment__doc__, "");
 static PyObject*
-handy_counter_increment(PyObject* self, PyObject* args)
+counter_increment(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -80,9 +80,9 @@ handy_counter_increment(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_counter_decrement__doc__, "");
+PyDoc_STRVAR(counter_decrement__doc__, "");
 static PyObject*
-handy_counter_decrement(PyObject* self, PyObject* args)
+counter_decrement(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -98,9 +98,9 @@ handy_counter_decrement(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_counter_change__doc__, "");
+PyDoc_STRVAR(counter_change__doc__, "");
 static PyObject*
-handy_counter_change(PyObject* self, PyObject* args)
+counter_change(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -117,9 +117,9 @@ handy_counter_change(PyObject* self, PyObject* args)
 
 
 
-PyDoc_STRVAR(handy_timer_init__doc__, "");
+PyDoc_STRVAR(timer_init__doc__, "");
 static PyObject*
-handy_timer_init(PyObject* self, PyObject* args)
+timer_init(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -141,9 +141,9 @@ handy_timer_init(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_timer_start__doc__, "");
+PyDoc_STRVAR(timer_start__doc__, "");
 static PyObject*
-handy_timer_start(PyObject* self, PyObject* args)
+timer_start(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -165,9 +165,9 @@ handy_timer_start(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_timer_stop__doc__, "");
+PyDoc_STRVAR(timer_stop__doc__, "");
 static PyObject*
-handy_timer_stop(PyObject* self, PyObject* args)
+timer_stop(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -189,9 +189,9 @@ handy_timer_stop(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_timer_heartbeat__doc__, "");
+PyDoc_STRVAR(timer_heartbeat__doc__, "");
 static PyObject*
-handy_timer_heartbeat(PyObject* self, PyObject* args)
+timer_heartbeat(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -213,9 +213,9 @@ handy_timer_heartbeat(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_timer_discard__doc__, "");
+PyDoc_STRVAR(timer_discard__doc__, "");
 static PyObject*
-handy_timer_discard(PyObject* self, PyObject* args)
+timer_discard(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -237,9 +237,9 @@ handy_timer_discard(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_gauge_init__doc__, "");
+PyDoc_STRVAR(gauge_init__doc__, "");
 static PyObject*
-handy_gauge_init(PyObject* self, PyObject* args)
+gauge_init(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -260,9 +260,9 @@ handy_gauge_init(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_gauge_set__doc__, "");
+PyDoc_STRVAR(gauge_set__doc__, "");
 static PyObject*
-handy_gauge_set(PyObject* self, PyObject* args)
+gauge_set(PyObject* self, PyObject* args)
 {
     using namespace handystats::metrics;
 
@@ -283,9 +283,9 @@ handy_gauge_set(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_configuration_file__doc__, "");
+PyDoc_STRVAR(configuration_file__doc__, "");
 static PyObject*
-handy_configuration_file(PyObject* self, PyObject* args)
+configuration_file(PyObject* self, PyObject* args)
 {
     const char *filename;
 
@@ -299,9 +299,9 @@ handy_configuration_file(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_configuration_json__doc__, "");
+PyDoc_STRVAR(configuration_json__doc__, "");
 static PyObject*
-handy_configuration_json(PyObject* self, PyObject* args)
+configuration_json(PyObject* self, PyObject* args)
 {
     const char *json_config;
 
@@ -315,9 +315,9 @@ handy_configuration_json(PyObject* self, PyObject* args)
 }
 
 
-PyDoc_STRVAR(handy_json_dump__doc__, "Return statistic as formated json");
+PyDoc_STRVAR(json_dump__doc__, "Return statistic as formated json");
 static PyObject*
-handy_json_dump(PyObject* self, PyObject* args)
+json_dump(PyObject* self, PyObject* args)
 {
     PyObject* value = Py_BuildValue("s", HANDY_JSON_DUMP()->c_str());
     return value;
@@ -328,32 +328,32 @@ handy_json_dump(PyObject* self, PyObject* args)
 */
 static PyMethodDef handystats_methods[] =
 {
-    {"handy_init", handy_init, METH_NOARGS, handy_init__doc__},
-    {"handy_finalize", handy_finalize, METH_NOARGS, handy_finalize__doc__},
+    {"init", init, METH_NOARGS, init__doc__},
+    {"finalize", finalize, METH_NOARGS, finalize__doc__},
 
     /* configuration */
-    {"handy_configuration_file", handy_configuration_file, METH_VARARGS, handy_configuration_file__doc__},
-    {"handy_configuration_json", handy_configuration_json, METH_VARARGS, handy_configuration_json__doc__},
+    {"configuration_file", configuration_file, METH_VARARGS, configuration_file__doc__},
+    {"configuration_json", configuration_json, METH_VARARGS, configuration_json__doc__},
 
     /* counter */
-    {"handy_counter_init", handy_counter_init, METH_VARARGS, handy_counter_init__doc__},
-    {"handy_counter_increment", handy_counter_increment, METH_VARARGS, handy_counter_increment__doc__},
-    {"handy_counter_decrement", handy_counter_decrement, METH_VARARGS, handy_counter_decrement__doc__},
-    {"handy_counter_change", handy_counter_change, METH_VARARGS, handy_counter_change__doc__},
+    {"counter_init", counter_init, METH_VARARGS, counter_init__doc__},
+    {"counter_increment", counter_increment, METH_VARARGS, counter_increment__doc__},
+    {"counter_decrement", counter_decrement, METH_VARARGS, counter_decrement__doc__},
+    {"counter_change", counter_change, METH_VARARGS, counter_change__doc__},
 
     /* timer */
-    {"handy_timer_init", handy_timer_init, METH_VARARGS, handy_timer_init__doc__},
-    {"handy_timer_start", handy_timer_start, METH_VARARGS, handy_timer_start__doc__},
-    {"handy_timer_stop", handy_timer_stop, METH_VARARGS, handy_timer_stop__doc__},
-    {"handy_timer_heartbeat", handy_timer_heartbeat, METH_VARARGS, handy_timer_heartbeat__doc__},
-    {"handy_timer_discard", handy_timer_discard, METH_VARARGS, handy_timer_discard__doc__},
+    {"timer_init", timer_init, METH_VARARGS, timer_init__doc__},
+    {"timer_start", timer_start, METH_VARARGS, timer_start__doc__},
+    {"timer_stop", timer_stop, METH_VARARGS, timer_stop__doc__},
+    {"timer_heartbeat", timer_heartbeat, METH_VARARGS, timer_heartbeat__doc__},
+    {"timer_discard", timer_discard, METH_VARARGS, timer_discard__doc__},
 
     /* gauge */
-    {"handy_gauge_init", handy_gauge_init, METH_VARARGS, handy_gauge_init__doc__},
-    {"handy_gauge_set", handy_gauge_set, METH_VARARGS, handy_gauge_set__doc__},
+    {"gauge_init", gauge_init, METH_VARARGS, gauge_init__doc__},
+    {"gauge_set", gauge_set, METH_VARARGS, gauge_set__doc__},
 
     /* dump */
-    {"handy_json_dump", handy_json_dump, METH_NOARGS, handy_json_dump__doc__},
+    {"json_dump", json_dump, METH_NOARGS, json_dump__doc__},
     {NULL, NULL, 0, NULL}
 };
 
