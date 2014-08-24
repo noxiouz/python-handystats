@@ -23,7 +23,7 @@ __author__ = 'Anton Tiurin'
 __copyright__ = 'Copyright 2014'
 __credits__ = []
 __license__ = 'LGPLv3+'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __maintainer__ = 'Anton Tiurin'
 __email__ = 'noxiouz@yandex.ru'
 __status__ = 'Production'
@@ -45,7 +45,9 @@ setup(
     long_description=open('./README.md').read(),
     packages=['handystats'],
     ext_modules=[Extension("handystats/_handystats",
-                 ["src/handystats.cpp"],
+                 ["src/handystats.cpp",
+                  "src/counter.cpp"],
+                 include_dirs=["include"],
                  extra_compile_args=["-std=c++0x", "-Wall"],
                  libraries=['handystats'])],
     classifiers=['Development Status :: 4 - Beta',
