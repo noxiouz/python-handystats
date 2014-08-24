@@ -19,6 +19,8 @@
 
 #include <Python.h>
 
+#include "counter.hpp"
+
 #include <handystats/operation.hpp>
 #include <handystats/configuration.hpp>
 #include <handystats/json_dump.hpp>
@@ -323,9 +325,6 @@ json_dump(PyObject* self, PyObject* args)
     return value;
 }
 
-/*
-    ToDo: No GIL
-*/
 static PyMethodDef handystats_methods[] =
 {
     {"init", init, METH_NOARGS, init__doc__},
@@ -358,10 +357,25 @@ static PyMethodDef handystats_methods[] =
 };
 
 
+#ifndef PyMODINIT_FUNC
+#define PyMODINIT_FUNC void
+#endif
+
 extern "C" {
-    void
+    PyMODINIT_FUNC
     init_handystats(void)
     {
-        (void) Py_InitModule3("_handystats", handystats_methods, NULL);
+        PyObject* module = Py_InitModule3("_handystats", handystats_methods, NULL);
+
+        if(PyType_Ready(&handystats_counter_type) < 0) {
+            return;
+        }
+        Py_INCREF(&handystats_counter_type);
+
+        PyModule_AddObject(
+            module,
+            "Counter",
+            reinterpret_cast<PyObject*>(&handystats_counter_type)
+        );
     }
 }
