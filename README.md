@@ -1,2 +1,1 @@
-Python binding for Handystats
-=============================
+# Python binding for Handystats
