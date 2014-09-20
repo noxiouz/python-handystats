@@ -20,20 +20,20 @@
 cimport _handystats
 
 cpdef init():
-	_handystats.HANDY_INIT()
+    _handystats.HANDY_INIT()
 
 cpdef finalize():
-	_handystats.HANDY_FINALIZE()
+    _handystats.HANDY_FINALIZE()
 
 cpdef configuration_json():
-	_handystats.HANDY_FINALIZE()
+    _handystats.HANDY_FINALIZE()
 
 cpdef bytes json_dump():
-	return _handystats.HANDY_JSON_DUMP().get().c_str()
+    return _handystats.HANDY_JSON_DUMP().get().c_str()
 
 
 cpdef counter_init(string name, int value):
-	_handystats.HANDY_COUNTER_INIT(name, value)
+    _handystats.HANDY_COUNTER_INIT(name, value)
 
 cpdef counter_increment(string name, int value):
-	_handystats.HANDY_COUNTER_INCREMENT(name, value)
+    _handystats.HANDY_COUNTER_INCREMENT(name, value)
