@@ -1,23 +1,5 @@
-#
-# Copyright (c) 2014 Tyurin Anton noxiouz@yandex.ru
-#
-# This file is part of Handystats for Python.
-#
-# Handystats for Python is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-#
-# Handystats for Python is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-
 from setuptools import setup, Extension
+from Cython.Build import cythonize
 
 __author__ = 'Anton Tiurin'
 __copyright__ = 'Copyright 2014'
@@ -32,6 +14,7 @@ __url__ = 'https://github.com/noxiouz/python-handystats'
 __description__ = 'Python binding for handystats library'
 d = 'https://github.com/noxiouz/python-handystats/archive/master.zip'
 
+
 setup(
     name=__title__,
     version=__version__,
@@ -44,12 +27,12 @@ setup(
     description=__description__,
     long_description=open('./README.md').read(),
     packages=['handystats'],
-    ext_modules=[Extension("handystats/_handystats",
-                 ["src/handystats.cpp",
-                  "src/counter.cpp"],
-                 include_dirs=["include"],
-                 extra_compile_args=["-std=c++0x", "-Wall"],
-                 libraries=['handystats'])],
+    ext_modules=cythonize([Extension("handystats/_handystats",
+                                     ["handystats/_handystats.pyx"],
+                                     language="c++",
+                                     extra_compile_args=["-std=c++0x",
+                                                         "-Wall"],
+                                     libraries=['handystats'])]),
     classifiers=['Development Status :: 4 - Beta',
                  'Intended Audience :: Developers',
                  'Programming Language :: Python',
