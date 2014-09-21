@@ -25,18 +25,36 @@ cdef extern from "<memory>" namespace "std":
         T* get()
 
 cdef extern from "handystats/operation.hpp":
-    void HANDY_INIT()
-    void HANDY_FINALIZE()
+    void HANDY_INIT() nogil
+    void HANDY_FINALIZE() nogil
 
 
 cdef extern from "handystats/configuration.hpp":
-    void HANDY_CONFIGURATION_JSON(const char *)
+    void HANDY_CONFIGURATION_JSON(const char *) nogil
 
 
 cdef extern from "handystats/json_dump.hpp":
-    shared_ptr[string] HANDY_JSON_DUMP()
+    shared_ptr[string] HANDY_JSON_DUMP() nogil
 
 
+# ToDo: convert int to int64
 cdef extern from "handystats/measuring_points.hpp":
-    void HANDY_COUNTER_INIT(string, int)
-    void HANDY_COUNTER_INCREMENT(string, int)
+    ctypedef int counter_value_type
+    void HANDY_COUNTER_INIT(string, counter_value_type)
+    void HANDY_COUNTER_INCREMENT(string, counter_value_type)
+    void HANDY_COUNTER_DECREMENT(string, counter_value_type)
+    void HANDY_COUNTER_CHANGE(string, counter_value_type)
+
+    ctypedef int timer_value_type
+    void HANDY_TIMER_INIT(string, timer_value_type)
+    void HANDY_TIMER_START(string, timer_value_type)
+    void HANDY_TIMER_STOP(string, timer_value_type)
+
+
+cdef extern from "handystats/metrics/counter.hpp" namespace "handystats::metrics":
+    ctypedef int counter_value_type
+    cdef cppclass counter:
+        counter(counter_value_type)
+        void increment(counter_value_type)
+        void decrement(counter_value_type)
+        int value
