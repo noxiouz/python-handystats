@@ -5,8 +5,8 @@ install_utility () {
 }
 
 build_handystats () {
-  git clone --recursive https://github.com/hindo/handystats.git -b master
-  cd cocaine-core
+  git clone --recursive https://github.com/shindo/handystats.git -b master
+  cd handystats
   yes | sudo mk-build-deps -i
   yes | debuild -uc -us
   cd .. && sudo dpkg -i *.deb || sudo apt-get install -f && rm -rf handystats
