@@ -3,8 +3,8 @@ python:
   - "2.7"
   - "pypy"
 before_install:
+  - "ci/travis.sh"   
   - "pip install -r requirements.txt"
-  - "sudo apt-get install g++"
 install:
   - "pip install flake8 python-coveralls"
 script: python setup.py nosetests
