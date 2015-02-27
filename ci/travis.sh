@@ -5,11 +5,11 @@ install_utility () {
 }
 
 build_handystats () {
-  git clone --recursive https://github.com/shindo/handystats.git -b master
-  cd handystats
+  git clone --recursive https://github.com/shindo/handystats.git handystats-core
+  cd handystats-core
   yes | sudo mk-build-deps -i
   yes | debuild -uc -us
-  cd .. && sudo dpkg -i *.deb || sudo apt-get install -f && rm -rf handystats
+  cd .. && sudo dpkg -i *.deb || sudo apt-get install -f && rm -rf handystats-core
 }
 
 make_env () {
