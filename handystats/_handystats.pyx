@@ -26,50 +26,46 @@ cpdef finalize():
     _handystats.HANDY_FINALIZE()
 
 cpdef configuration_json(bytes config):
-    _handystats.HANDY_CONFIGURATION_JSON(config)
+    _handystats.HANDY_CONFIG_JSON(config)
 
 cpdef bytes json_dump():
-    return _handystats.HANDY_JSON_DUMP().get().c_str()
+    return _handystats.HANDY_JSON_DUMP()
 
 
 # Counter
-cpdef counter_init(bytes name, int value):
-    _handystats.HANDY_COUNTER_INIT(name, value)
+cpdef counter_init(bytes name, int64_t value):
+    _handystats.HANDY_COUNTER_INIT(move(name), value)
 
-cpdef counter_increment(bytes name, int value):
-    _handystats.HANDY_COUNTER_INCREMENT(name, value)
+cpdef counter_increment(bytes name, int64_t value):
+    _handystats.HANDY_COUNTER_INCREMENT(move(name), value)
 
-cpdef counter_decrement(bytes name, int value):
-    _handystats.HANDY_COUNTER_DECREMENT(name, value)
+cpdef counter_decrement(bytes name, int64_t value):
+    _handystats.HANDY_COUNTER_DECREMENT(move(name), value)
 
-cpdef counter_change(bytes name, int value):
-    _handystats.HANDY_COUNTER_CHANGE(name, value)
+cpdef counter_change(bytes name, int64_t value):
+    _handystats.HANDY_COUNTER_CHANGE(move(name), value)
 
 
-cpdef timer_init(bytes name, int instance_id):
-    _handystats.HANDY_TIMER_INIT(name, instance_id)
+cpdef timer_init(bytes name, int64_t instance_id):
+    _handystats.HANDY_TIMER_INIT(move(name), instance_id)
 
-cpdef timer_start(bytes name, int instance_id):
-    _handystats.HANDY_TIMER_START(name, instance_id)
+cpdef timer_start(bytes name, int64_t instance_id):
+    _handystats.HANDY_TIMER_START(move(name), instance_id)
 
-cpdef timer_stop(bytes name, int instance_id):
-    _handystats.HANDY_TIMER_STOP(name, instance_id)
+cpdef timer_stop(bytes name, int64_t instance_id):
+    _handystats.HANDY_TIMER_STOP(move(name), instance_id)
 
 
 cdef class Counter:
     cdef _handystats.counter *thisptr
-    def __cinit__(self, int value=0):
-        self.thisptr = new _handystats.counter(value)
+    def __cinit__(self):
+        self.thisptr = new _handystats.counter()
 
     def __dealloc__(self):
         del self.thisptr
 
-    def increment(self, int value):
+    def increment(self, int64_t value):
         self.thisptr.increment(value)
 
-    def decrement(self, int value):
+    def decrement(self, int64_t value):
         self.thisptr.decrement(value)
-
-    property value:
-        def __get__(self):
-            return self.thisptr.value

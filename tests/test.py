@@ -4,15 +4,8 @@ import time
 import handystats
 
 json_config = {
-    "handystats": {
-        "incremental-statistics": {
-            "moving-average-alpha": 0.1,
-            "moving-interval": 1000},
-        "timer": {
-            "idle-timeout": 1000},
-        "metrics-dump": {
-            "interval": 200}
-    }
+        "enable": True,
+        "dump-interval": 10
 }
 
 
@@ -20,6 +13,7 @@ class TestHandystats(object):
 
     def setup(self):
         handystats.init()
+        handystats.configuration_json(json.dumps(json_config))
 
     def teardown(self):
         handystats.finalize()
@@ -54,14 +48,11 @@ class TestConfiguration(object):
     def test_json_configuration(self):
         handystats.configuration_json(json.dumps(json_config))
 
-    def test_json_configuration2(self):
-        handystats.configuration_json("sdsd")
 
-
-class TestObjects(object):
-
-    def test_counter(self):
-        counter = handystats.Counter(100)
-        counter.increment(100)
-        counter.decrement(50)
-        assert counter.value == 150, counter.value
+#class TestObjects(object):
+#
+#    def test_counter(self):
+#        counter = handystats.Counter(100)
+#        counter.increment(100)
+#        counter.decrement(50)
+#        assert counter.value == 150, counter.value

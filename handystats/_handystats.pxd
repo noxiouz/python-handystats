@@ -18,23 +18,27 @@
 #
 
 from libcpp.string cimport string
+from libc.stdint cimport int64_t
 
 
-cdef extern from "<memory>" namespace "std":
-    cppclass shared_ptr[T]:
-        T* get()
+#cdef extern from "<memory>" namespace "std":
+#    cppclass shared_ptr[T]:
+#        T* get()
 
-cdef extern from "handystats/operation.hpp":
+cdef extern from "<utility>" namespace "std":
+    string move(string)
+
+cdef extern from "handystats/core.hpp":
     void HANDY_INIT() nogil
     void HANDY_FINALIZE() nogil
 
 
-cdef extern from "handystats/configuration.hpp":
-    void HANDY_CONFIGURATION_JSON(const char *) nogil
+cdef extern from "handystats/core.hpp":
+    void HANDY_CONFIG_JSON(const char *) nogil
 
 
 cdef extern from "handystats/json_dump.hpp":
-    shared_ptr[string] HANDY_JSON_DUMP() nogil
+    string HANDY_JSON_DUMP() nogil
 
 
 # ToDo: convert int to int64
@@ -52,9 +56,8 @@ cdef extern from "handystats/measuring_points.hpp":
 
 
 cdef extern from "handystats/metrics/counter.hpp" namespace "handystats::metrics":
-    ctypedef int counter_value_type
+    ctypedef int64_t counter_value_type
     cdef cppclass counter:
-        counter(counter_value_type)
+        counter()
         void increment(counter_value_type)
         void decrement(counter_value_type)
-        int value
