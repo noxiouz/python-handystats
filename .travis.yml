@@ -1,7 +1,6 @@
 language: python
 python:
   - "2.7"
-  - "pypy"
 before_install:
   - "ci/travis.sh"   
   - "pip install -r requirements.txt"
